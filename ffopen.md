@@ -1,10 +1,11 @@
-# 通用界面接入协议
-version: 0.1
+通用界面接入协议
+=============
+version: **0.1**
 
 此协议规约第三方组件接入广场详情的方式，使开发者能够为广场开发组件，广场方可以使用第三方组件来组合自己广场的功能，开发者可以使用飞凡提供的广场组件和API来开发组件，也可使用第三方api来的开发特殊功能。
-## 飞凡入口容器接入方式
+## 1.飞凡入口容器接入方式
 入口容器目前采用 [React Native](https://github.com/facebook/react-native) 的方式，下面规约接入必须要提供的内容。
-### 入口
+### 1.1 入口
 飞凡提供一个通用的app接入入口View,可能的形式如下：
 ![入口]( http://taontech.github.io/kidsweb/rukou.png )
 
@@ -20,8 +21,9 @@ version: 0.1
 		jsMD5:			"校验jsboundle的MD5，防止逻辑篡改绕过审核"
 		author:       	"作者"
 		appKey:		   	"飞凡为app提供的唯一appkey"
+		apilist:		["提供api列表"]
 	}
-/*	
+/*
 	icon:         	120*120 png格式
 	name:         	加ff和ff前缀，用于内部区分
 	title：       	显示在容器中的名称,5个字符之内
@@ -30,7 +32,63 @@ version: 0.1
 	appKey:		   	在线申请的app唯一key
 */
 ```
-## 
+### 1.2 组件类型
+组件类型包含**页面**和**纯功能**。
+####页面
+完整的界面逻辑，输出类型如下面事例：
+
+```
+var weathercell = React.createClass({
+    getInitialState: function() {
+			....
+    },
+    render:function(){
+        return (
+            <View
+						....
+            </View>
+        );
+
+    },
+    executeQuery: function () {
+      .....
+});
+module.exports = weathercell;
+```
+####纯功能组件
+输出可以是**函数和数据**，不包含界面逻辑
+
+如下面代码包含数据和函数等输出：
+
+``` 
+const plazastyles = {};
+plazalist.forEach(plaza => {
+  plazastyles[plaza.key] = plaza.style;
+});
+function getplazastyle(plazaID){
+  var style = plazastyles[plazaID];
+  return style;
+};
+const plazas = {
+  plazalist,
+  plazastyles,
+  getplazastyle,
+}
+module.exports = plazas;
+```
+
+
+### 1.3 mock app 供开发调试
+为方便开发者调试，我们需要为开发者提供mock app来展示组件，此app接受开发者输入的js地址，输出开发者组件的样式和功能。app中包含飞凡提供的所有开放组件和api，以及需要的mock数据，比如广场详情等。在此app中运行的组件和在飞凡上运行效果一致。
+
+### 1.4 功能限定
+UF 命名打头，用于区分第三方开发者组件和飞凡内部组件，提供不同的权限控制。对第三方组件开放的功能有：
+
++ 飞凡全部的开放api（限定飞凡域名）
++ 无登录态的飞凡数据（广场、商户）
++ 室内定位
++ 飞凡对开发者开放的js组件
+
 
 ## 广场详情组件接入方式
 
@@ -70,3 +128,4 @@ Note right of 广场配置文件: 页面显示元素
 
 ## 品牌组件接入方式
 ## 飞凡提供的组件
+api 白名单方式调用，统一api调用方式，不单独开放js api 接口，而是以反射的方式来请求。
