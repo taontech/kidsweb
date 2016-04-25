@@ -38,7 +38,7 @@ version: **0.1**
 	appKey:		   	在线申请的app唯一key
 */
 ```
-### 1.2 组件类型
+### 1.2组件类型
 组件类型包含**页面**和**纯功能**。
 ####页面
 完整的界面逻辑，输出类型如下面事例：
@@ -51,13 +51,16 @@ var weathercell = React.createClass({
     render:function(){
         return (
             <View
-						....
+				....
             </View>
         );
-
     },
     executeQuery: function () {
-      .....
+      	.....
+    },
+    appconfig:{
+		......
+	}
 });
 module.exports = weathercell;
 ```
@@ -85,13 +88,23 @@ module.exports = plazas;
 
 
 
-### 1.4 功能限定
+### 1.3 功能限定
 UF 命名打头，用于区分第三方开发者组件和飞凡内部组件，提供不同的权限控制。对第三方组件开放的功能有：
 
 + 飞凡全部的开放api（限定飞凡域名）
 + 无登录态的飞凡数据（广场、商户）
 + 室内定位
 + 飞凡对开发者开放的js组件
+
+引用方式：引用 **'react-ffan'**
+
+```
+import ffanRN, {
+    ffLocation,
+    ffPlazaList,
+    ffanPay
+  }from 'react-ffan';
+```
 
 
 ## 广场详情组件接入方式
