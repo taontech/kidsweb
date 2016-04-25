@@ -7,6 +7,7 @@ version: **0.1**
 入口容器目前采用 [React Native](https://github.com/facebook/react-native) 的方式，下面规约接入必须要提供的内容。
 ### 1.1 入口
 飞凡提供一个通用的app接入入口View,可能的形式如下：
+
 ![入口]( http://taontech.github.io/kidsweb/rukou.png )
 
 开发者需要提供的如下配置信息：
@@ -98,6 +99,9 @@ UF 命名打头，用于区分第三方开发者组件和飞凡内部组件，�
 
 > 举例：'**UF_weather_beijing.js**'
 > 其中 UF 代表第三方组件，飞凡自有组件以FF表示；weather代表功能是天气；beijing表示是北京的天气。
+
+如下图所示，
+
 
 
 组件按照标准RN类的写法，必须提供以下方法：
