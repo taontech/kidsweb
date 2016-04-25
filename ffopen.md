@@ -12,7 +12,7 @@ version: **0.1**
 
 入口view本身以Native编写，便于集成到现有项目中，内部逻辑依旧采用RN编写，使用RN动态的便利性为app容器提供灵活配置。
 
-![入口]( http://taontech.github.io/kidsweb/appCon.png )
+ ![]( http://taontech.github.io/kidsweb/appCon.png =350x)
 
 
 开发者需要提供的如下配置信息：
