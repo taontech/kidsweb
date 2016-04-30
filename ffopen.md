@@ -7,7 +7,13 @@ version: **0.1**
 入口容器目前采用 [React Native](https://github.com/facebook/react-native) 的方式，下面规约接入必须要提供的内容。
 ### 1.1 入口
 飞凡提供一个通用的app接入入口View,可能的形式如下：
+
 ![入口]( http://taontech.github.io/kidsweb/rukou.png )
+
+入口view本身以Native编写，便于集成到现有项目中，内部逻辑依旧采用RN编写，使用RN动态的便利性为app容器提供灵活配置。
+
+ ![]( http://taontech.github.io/kidsweb/appCon.png =350x)
+
 
 开发者需要提供的如下配置信息：
 
@@ -32,7 +38,7 @@ version: **0.1**
 	appKey:		   	在线申请的app唯一key
 */
 ```
-### 1.2 组件类型
+### 1.2组件类型
 组件类型包含**页面**和**纯功能**。
 ####页面
 完整的界面逻辑，输出类型如下面事例：
@@ -45,13 +51,16 @@ var weathercell = React.createClass({
     render:function(){
         return (
             <View
-						....
+				....
             </View>
         );
-
     },
     executeQuery: function () {
-      .....
+      	.....
+    },
+    appconfig:{
+		......
+	}
 });
 module.exports = weathercell;
 ```
@@ -79,7 +88,7 @@ module.exports = plazas;
 
 
 
-### 1.4 功能限定
+### 1.3 功能限定
 UF 命名打头，用于区分第三方开发者组件和飞凡内部组件，提供不同的权限控制。对第三方组件开放的功能有：
 
 + 飞凡全部的开放api（限定飞凡域名）
@@ -87,17 +96,34 @@ UF 命名打头，用于区分第三方开发者组件和飞凡内部组件，�
 + 室内定位
 + 飞凡对开发者开放的js组件
 
+引用方式：引用 **'react-ffan'**
+
+```
+import ffanRN, {
+    ffLocation,
+    ffPlazaList,
+    ffanPay
+  }from 'react-ffan';
+```
+
 
 ## 广场详情组件接入方式
 广场详情目前提供组件容器，开放着可以开发只针对广场的组件，广场管理者可以选择自己广场使用的组件，为自己广场提供不同的展示效果和功能
 
-### 接入标准
+### js文件命名
 每个组件限定一个js文件，可以import RN系统组件,可以引用飞凡提供的组件。文件的命名规则如下：
 
 >（组件分类) _ (组件功能分类)_ (具体类型).js
 
 > 举例：'**UF_weather_beijing.js**'
 > 其中 UF 代表第三方组件，飞凡自有组件以FF表示；weather代表功能是天气；beijing表示是北京的天气。
+
+如下图所示:
+
+![入口]( http://taontech.github.io/kidsweb/typelist.png )
+
+我们可以为同一功能的组件提供多个选择，其中可能包含样式的不同或者具体功能的区别。可以通过**UF_weather**来区分组件的大功能分类。
+
 
 
 组件按照标准RN类的写法，必须提供以下方法：
