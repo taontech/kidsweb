@@ -3,6 +3,14 @@
 version: **0.1**
 
 此协议规约第三方组件接入广场详情的方式，使开发者能够为广场开发组件，广场方可以使用第三方组件来组合自己广场的功能，开发者可以使用飞凡提供的广场组件和API来开发组件，也可使用第三方api来的开发特殊功能。
+
+# 前期准备
+#### 学习React Native
+app容器和广场详情通用界面采用[React Native](https://facebook.github.io/react-native/)来开发，大家需要到官网先学习RN（React Native）的基本用法，也可以到中文的一个第三方网站[React Native 中文网](http://reactnative.cn)来了解学习。
+#### 学习JSX
+JSX 是一个看起来很像 XML 的 JavaScript 语法扩展。React 可以用来做简单的 JSX 句法转换。
+大家可以在这个地址了解学习[深入理解 JSX](http://reactjs.cn/react/docs/jsx-in-depth.html)
+
 ## 1.飞凡入口容器接入方式
 入口容器目前采用 [React Native](https://github.com/facebook/react-native) 的方式，下面规约接入必须要提供的内容。
 ### 1.1 入口
@@ -124,6 +132,10 @@ import ffanRN, {
 
 我们可以为同一功能的组件提供多个选择，其中可能包含样式的不同或者具体功能的区别。可以通过**UF_weather**来区分组件的大功能分类。
 
+组件为方便查看编辑引用等操作，要求每个组件需要提供一个和组件js文件同名的配置文件，命名规则同组件命名：'**UF_weather_beijing.json**'
+
+同一类型的组件放置在一个路径下，以类型名作为文件夹名称：
+![路径](http://taontech.github.io/kidsweb/path)
 
 
 组件按照标准RN类的写法，必须提供以下方法：
