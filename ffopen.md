@@ -3,7 +3,11 @@
 version: **0.1**
 
 此协议规约第三方组件接入广场详情的方式，使开发者能够为广场开发组件，广场方可以使用第三方组件来组合自己广场的功能，开发者可以使用飞凡提供的广场组件和API来开发组件，也可使用第三方api来的开发特殊功能。
-
+# 快捷方式的接入方式
+* 广场可以有自己的app
+* 
+* 不同app接入的方式
+* 数据共享方式，加入类**cookie**机制
 # 前期准备
 #### 学习React Native
 app容器和广场详情通用界面采用[React Native](https://facebook.github.io/react-native/)来开发，大家需要到官网先学习RN（React Native）的基本用法，也可以到中文的一个第三方网站[React Native 中文网](http://reactnative.cn)来了解学习。
@@ -132,11 +136,6 @@ import ffanRN, {
 
 我们可以为同一功能的组件提供多个选择，其中可能包含样式的不同或者具体功能的区别。可以通过**UF_weather**来区分组件的大功能分类。
 
-组件为方便查看编辑引用等操作，要求每个组件需要提供一个和组件js文件同名的配置文件，命名规则同组件命名：'**UF_weather_beijing.json**'
-
-同一类型的组件放置在一个路径下，以类型名作为文件夹名称：
-![路径](http://taontech.github.io/kidsweb/path)
-
 
 组件按照标准RN类的写法，必须提供以下方法：
 
@@ -159,14 +158,30 @@ getInfo函数返回组件的信息，用于展示和配置时：
 ```
     getInfo:function(){
     return {
-    	title: "需要显示的组件名称-非必选"，
-    	icon: 	"组件图标"，
-    	height: 100, // 组件高度，宽度不用指定，以手机宽度为准
-    	discription: "组件功能描述"，
-    	disImgs:["http://img1.ffan.com/2.png",...], // 组件截图
-    	AuthorKey: "开发者标识"
+    	/* 
+    		从同名配置文件中读取
+    		UF_weather_beijing.json
+    	*/
     }
 
+```
+
+### 配置文件
+组件为方便查看编辑引用等操作，要求每个组件需要提供一个和组件js文件同名的配置文件，命名规则同组件命名：'**UF_weather_beijing.json**'
+
+同一类型的组件放置在一个路径下，以类型名作为文件夹名称：
+![路径](http://taontech.github.io/kidsweb/path.png)
+
+配置文件(如：UF_weather_beijing.json)目前需要提供以下内容：
+
+```
+{
+  "FF_PlazaActivityCell_0":{
+  "name":"FF_PlazaActivityCell_0",
+  "imageUrl":"https://.../WDPage/plaza/plazaActivity.png",
+  "describle":"显示广场的活动组件（改组件主要作用是显示广场详情页的活动相关的模块信息。）",
+  "author":"aksoftware"}
+}
 ```
 
 ### 流程图
@@ -205,6 +220,5 @@ Note right of 广场配置文件: 页面显示元素
 
 ## mock app 供开发调试
 为方便开发者调试，我们需要为开发者提供mock app来展示组件，此app接受开发者输入的js地址，输出开发者组件的样式和功能。app中包含飞凡提供的所有开放组件和api，以及需要的mock数据，比如广场详情等。在此app中运行的组件和在飞凡上运行效果一致。
-## 品牌组件接入方式
 ## 飞凡提供的组件
-api 白名单方式调用，统一api调用方式，不单独开放js api 接口，而是以反射的方式来请求。
+* api 白名单方式调用，统一api调用方式，不单独开放js api 接口，而是以反射的方式来请求。
