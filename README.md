@@ -19,3 +19,5 @@ TODOList
 ========
 + swift环境搭建
 
+现已加入GMC计划
+
